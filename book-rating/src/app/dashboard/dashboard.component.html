@@ -1,2 +1,16 @@
+<br-book
+    *ngFor="let b of books"
+    [book]="b"
+></br-book>
 
-<br-book [book]="books[0]"></br-book>
+<ul>
+    <li *ngFor="let b of books; index as i; first as f">
+        {{ i + 1 }} – {{ b.title }}
+        <span *ngIf="f">FIRST</span>
+    </li>
+</ul>
+
+
+<p>
+    Anzahl Bücher: {{ books.length }}
+</p>
