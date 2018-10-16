@@ -13,6 +13,12 @@ var Customer = /** @class */ (function () {
         var callback2 = function () { return "!!\nDie ID ist " + _this.id + "!!"; };
         return callback2();
     };
+    Customer.prototype.myMethod = function (arg) {
+        if (typeof arg === 'number') {
+            return arg.toString();
+        }
+        return arg;
+    };
     return Customer;
 }());
 exports.Customer = Customer;
