@@ -1,10 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { mock, spy, verify, instance, when, anything } from 'ts-mockito';
+import { By } from '@angular/platform-browser';
 
 import { BookComponent } from './book.component';
 import { BookRatingService } from '../shared/book-rating.service';
 
-fdescribe('BookComponent', () => {
+describe('BookComponent', () => {
   let component: BookComponent;
   let fixture: ComponentFixture<BookComponent>;
   let rs: BookRatingService;
@@ -58,7 +59,7 @@ fdescribe('BookComponent', () => {
     // man kann hier konkretes Argument für den Aufruf angeben
     verify(rs.rateUp(component.book)).once();
   });
-  
+
   it('should throw event for rateUp', (done) => {
     // Mockservice mit Funktionalität füllen
     // wenn rateUp gerufen wird, dann konkreten Wert returnen
@@ -74,17 +75,49 @@ fdescribe('BookComponent', () => {
       // (ist es aber nicht)
       done();
     });
-    
+
     // Aktion
     component.rateUp();
-    
+
   });
-  
+
   it('should call rateUp for button click', () => {
+    // Komponente überwachen (spy)
+    const spiedComp = spy(component);
+
+    // Button holen
+    // fixture.debugElement ist das gerenderte Template der Komponente
+    const rateUpBtn = fixture.debugElement
+      .query(By.css('.testing-rate-up-btn'))
+      .nativeElement;
     
+    // Klick auslösen
+    rateUpBtn.click();
+
+    // Expectation
+    verify(spiedComp.rateUp()).once();
   });
-  
-  it('should display the correct rating', () => {});
+
+  it('should display the correct rating', () => {
+    // Element selektieren
+    const ratingBox = fixture.debugElement
+      .query(By.css('.testing-rating-box'))
+      .nativeElement;
+    
+    // prüfen, ob korrekt angezeigt
+    expect(ratingBox.textContent).toBe('3');
+    
+    // ändern
+    component.book = {
+      ...component.book,
+      rating: 1
+    };
+    
+    fixture.detectChanges();
+
+    // prüfen, ob korrekt angezeigt
+    expect(ratingBox.textContent).toBe('1');
+  });
 
 
 
