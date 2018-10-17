@@ -11,5 +11,8 @@
         <span *ngFor="let r of getStars()">⭐</span>️
       </div>
       <p>{{ book.description }}</p>
+
+      <button (click)="rateUp()" class="btn btn-secondary mr-2"> + </button>
+      <button (click)="rateDown()" class="btn btn-secondary"> – </button>
     </div>
   </div>

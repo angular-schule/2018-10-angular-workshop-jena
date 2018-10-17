@@ -8,6 +8,8 @@ import { Book } from '../shared/book';
 })
 export class DashboardComponent implements OnInit {
 
+  url = 'https://angular.schule';
+
   books: Book[];
 
   constructor() { }
