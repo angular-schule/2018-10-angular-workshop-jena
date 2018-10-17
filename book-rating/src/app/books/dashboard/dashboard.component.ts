@@ -31,4 +31,16 @@ export class DashboardComponent implements OnInit {
     ];
   }
 
+  updateSortList(book: Book) {
+    const cleanedList = this.books.filter(
+      b => b.isbn !== book.isbn
+    );
+
+    cleanedList.push(book); // mutierend, aber hier okay
+    // oder: const newList = [...cleanedList, book];
+
+    cleanedList.sort((a, b) => b.rating - a.rating);
+    this.books = cleanedList;
+  }
+
 }
