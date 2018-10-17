@@ -12,10 +12,13 @@ export class BookComponent implements OnInit {
 
   @Output() rate = new EventEmitter<Book>();
   @Input() book: Book;
+  bookPrice: number;
 
   constructor(private rs: BookRatingService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.bookPrice = 34.90 + this.book.rating + (this.book.rating / 100);
+  }
 
   rateUp() {
     const ratedBook = this.rs.rateUp(this.book);

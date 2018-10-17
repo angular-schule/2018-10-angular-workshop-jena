@@ -7,6 +7,9 @@
         <h2>
           {{ book.title }}
           <span class="badge badge-secondary testing-rating-box">{{ book.rating }}</span>
+          <span class="badge badge-danger">
+            {{ bookPrice | currency:'EUR' }}
+          </span>
         </h2>
         <span *ngFor="let r of getStars()">⭐</span>️
       </div>
