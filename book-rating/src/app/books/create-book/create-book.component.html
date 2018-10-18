@@ -1,3 +1,36 @@
-<input type="text" name="testinput" [(ngModel)]="testObj.bar">
+<form [formGroup]="bookForm">
+  
+  <div class="form-group">
+    <label>ISBN</label>
+    <input type="text" formControlName="isbn" class="form-control">
 
-{{ testObj | json }}
+    <div class="feedback-red" *ngIf="isInvalid('isbn')">
+      ISBN ist ungültig
+    </div>
+    <div class="feedback-red" *ngIf="hasError('isbn', 'minlength')">
+      ISBN ist zu kurz
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label>Title</label>
+    <input type="text" formControlName="title" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label>Description</label>
+    <textarea formControlName="description" class="form-control"></textarea>
+  </div>
+
+  <div class="form-group">
+    <button
+      [disabled]="bookForm.invalid"
+      type="submit"
+      class="btn btn-danger">Submit</button>
+  </div>
+
+</form> 
+
+<pre>
+{{ bookForm.value | json }}
+</pre>
