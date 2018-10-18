@@ -7,3 +7,4 @@ https://www.npmjs.com/package/ts-mockito
 https://angular.io/guide/testing
 
 https://toddmotto.com/building-tesla-range-calculator-angular-2-reactive-forms
+https://leanpub.com/router

@@ -6,7 +6,6 @@ import localeDe from '@angular/common/locales/de';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BooksModule } from './books/books.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +15,7 @@ import { BooksModule } from './books/books.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BooksModule
+    // BooksModule // weg wegen Lazy Loading
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'de' }
