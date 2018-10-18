@@ -1,8 +1,8 @@
-<form [formGroup]="bookForm">
+<form [formGroup]="bookForm" (ngSubmit)="submitForm()">
   
   <div class="form-group">
     <label>ISBN</label>
-    <input type="text" formControlName="isbn" class="form-control">
+    <input type="text" formControlName="isbn" class="form-control" placeholder="ISBN">
 
     <div class="feedback-red" *ngIf="isInvalid('isbn')">
       ISBN ist ungültig

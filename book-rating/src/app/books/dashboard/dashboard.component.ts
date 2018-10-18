@@ -44,4 +44,8 @@ export class DashboardComponent implements OnInit {
     this.books = cleanedList;
   }
 
+  addBookToList(book: Book) {
+    this.books = [...this.books, book];
+  }
+
 }
