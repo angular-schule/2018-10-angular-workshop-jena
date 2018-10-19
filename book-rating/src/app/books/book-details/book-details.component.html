@@ -1,4 +1,13 @@
-{{ book | json }}
+{{ book$ | async | json }}
+
+<ng-container *ngIf="book$ | async as book; else loading">
+    <h1>{{ book.title }}</h1>
+    <p>{{ book.description }}</p>
+</ng-container>
+
+<ng-template #loading>
+    Loading...
+</ng-template>
 <br>
 
 <a routerLink="/books">Zum Dashboard</a><br>

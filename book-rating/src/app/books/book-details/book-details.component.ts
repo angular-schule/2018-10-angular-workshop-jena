@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookStoreService } from '../shared/book-store.service';
 import { Book } from '../shared/book';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'br-book-details',
@@ -10,7 +11,7 @@ import { Book } from '../shared/book';
 })
 export class BookDetailsComponent implements OnInit {
 
-  book: Book;
+  book$: Observable<Book>;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,8 +23,7 @@ export class BookDetailsComponent implements OnInit {
 
     // Asynchron
     this.route.paramMap.subscribe(params => {
-      this.bs.getSingle(params.get('isbn'))
-        .subscribe(book => this.book = book);
+      this.book$ = this.bs.getSingle(params.get('isbn'));
         // TODO: verschachtelte Subscription vermeiden!
     });
   }
