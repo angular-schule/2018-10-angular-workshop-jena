@@ -23,7 +23,15 @@ export class BookStoreService {
         rawBook => this.mapToBook(rawBook)
       ))
     );
-    // TODO: Echte Bücher!
+  }
+
+  search(term: string): Observable<Book[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/books/search/${term}`).pipe(
+      map(rawBooks => rawBooks ? rawBooks : []),
+      map(rawBooks => rawBooks.map(
+        rawBook => this.mapToBook(rawBook))
+      )
+    );
   }
 
   private mapToBook(rawBook: any): Book {
