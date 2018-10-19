@@ -1,7 +1,7 @@
 <!--<br-create-book></br-create-book>-->
 
 <p>
-  <br-book *ngFor="let b of []" [book]="b"></br-book>
+  <br-book *ngFor="let b of books$ | async" [book]="b"></br-book>
 </p>
 
 
