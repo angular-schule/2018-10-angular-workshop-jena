@@ -21,6 +21,9 @@ export class HigherorderComponent implements OnInit {
     
     /******************************/
 
+    this.result$ = this.source$.pipe(
+      exhaustMap(tier => this.es.echo(tier, 3))
+    );
 
     /******************************/
     
