@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Book } from './book';
-import { Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { delay, catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +14,32 @@ export class BookStoreService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Book[]> {
-    return this.http.get<Book[]>(`${this.apiUrl}/books`);
+    return this.http.get<Book[]>(`${this.apiUrl}/books`).pipe(
+      catchError(err => {
+        console.log('FEHLER', err);
+        return of([]);
+      }),
+      map(rawBooks => rawBooks.map(
+        rawBook => this.mapToBook(rawBook)
+      ))
+    );
     // TODO: Echte Bücher!
-    // TODO: Error Handling
+  }
+
+  private mapToBook(rawBook: any): Book {
+    return {
+      isbn: rawBook.isbn,
+      title: rawBook.title,
+      description: rawBook.description,
+      rating: rawBook.rating
+    };
   }
 
   getSingle(isbn: string): Observable<Book> {
-    return this.http.get<Book>(`${this.apiUrl}/book/${isbn}`);
+    // TODO: hier nicht any verwenden, sondern z.B. "BookResponse"
+    return this.http.get<any>(`${this.apiUrl}/book/${isbn}`).pipe(
+      map(rawBook => this.mapToBook(rawBook))
+    );
   }
 
   create(book: Book): Observable<any> {
