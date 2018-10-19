@@ -5,7 +5,7 @@
 </p>
 
 
-<div class="progress mb-4 mt-5" *ngIf="false">
+<div class="progress mb-4 mt-5" *ngIf="loading$ | async">
   <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%">
     Bücher werden geladen…
   </div>
